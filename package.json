@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "tsx watch src/index.ts"
+    "dev": "tsx watch src/index.ts",
+    "embed:quotes": "ts-node scripts/embedQuotes.ts"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +16,8 @@
   "dependencies": {
     "@genkit-ai/express": "^1.16.1",
     "@genkit-ai/google-genai": "^1.16.1",
+    "@google/generative-ai": "^0.24.1",
+    "@supabase/supabase-js": "^2.56.0",
     "dotenv": "^17.2.1",
     "express": "^4.21.2",
     "genkit": "^1.16.1",
@@ -24,6 +27,7 @@
   "devDependencies": {
     "@types/express": "^5.0.3",
     "@types/node": "^24.3.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.9.2"
   }
 }

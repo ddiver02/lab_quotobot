@@ -2,6 +2,7 @@ import 'dotenv/config';
 import { genkit, z } from 'genkit';
 import { googleAI } from '@genkit-ai/google-genai';
 import express from 'express';
+import { QUOTES } from "./data/quotes"
 
 // 🔎 키 프리픽스 확인(디버그용)
 console.log('[ENV] GOOGLE_API_KEY prefix =', (process.env.GOOGLE_API_KEY || '').slice(0, 6));
@@ -17,20 +18,6 @@ const ai = genkit({
 // ─────────────────────────────────────────────
  // 데이터셋 & 스키마
 // ─────────────────────────────────────────────
-const QUOTES = [
-  {
-    author: '찰스 디킨스',
-    source: '두 도시 이야기',
-    emotion: ['밝음', '양가감정', '희망', '덧없음'],
-    quote: '그것은 최고의 시대였고, 그것은 최악의 시대였다.',
-  },
-  {
-    author: '어니스트 헤밍웨이',
-    source: '노인과 바다',
-    emotion: ['투지', '의지', '도전', '역경', '끈기'],
-    quote: '인간은 패배하도록 만들어지지 않았다. 인간은 파괴될 수는 있어도, 패배하지는 않는다.',
-  },
-];
 
 const QuoteMatchSchema = z.object({
   input: z.string(),

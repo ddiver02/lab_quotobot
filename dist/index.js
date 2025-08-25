@@ -8,6 +8,7 @@ require("dotenv/config");
 const genkit_1 = require("genkit");
 const google_genai_1 = require("@genkit-ai/google-genai");
 const express_1 = __importDefault(require("express"));
+const quotes_1 = require("./data/quotes");
 // 🔎 키 프리픽스 확인(디버그용)
 console.log('[ENV] GOOGLE_API_KEY prefix =', (process.env.GOOGLE_API_KEY || '').slice(0, 6));
 // ─────────────────────────────────────────────
@@ -20,23 +21,9 @@ const ai = (0, genkit_1.genkit)({
 // ─────────────────────────────────────────────
 // 데이터셋 & 스키마
 // ─────────────────────────────────────────────
-const QUOTES = [
-    {
-        author: '찰스 디킨스',
-        source: '두 도시 이야기',
-        emotion: ['밝음', '양가감정', '희망', '덧없음'],
-        quote: '그것은 최고의 시대였고, 그것은 최악의 시대였다.',
-    },
-    {
-        author: '어니스트 헤밍웨이',
-        source: '노인과 바다',
-        emotion: ['투지', '의지', '도전', '역경', '끈기'],
-        quote: '인간은 패배하도록 만들어지지 않았다. 인간은 파괴될 수는 있어도, 패배하지는 않는다.',
-    },
-];
 const QuoteMatchSchema = genkit_1.z.object({
     input: genkit_1.z.string(),
-    chosenIndex: genkit_1.z.number().int().min(0).max(QUOTES.length - 1),
+    chosenIndex: genkit_1.z.number().int().min(0).max(quotes_1.QUOTES.length - 1),
     reason: genkit_1.z.string(),
     quote: genkit_1.z.object({
         author: genkit_1.z.string(),
@@ -59,7 +46,7 @@ exports.quoteMatchFlow = ai.defineFlow({
         '반드시 JSON으로만 응답하고, keys는 input, chosenIndex, reason 이다.',
         'chosenIndex는 정수이며 인용구 배열의 인덱스여야 한다.',
     ].join('\n');
-    const optionsText = QUOTES
+    const optionsText = quotes_1.QUOTES
         .map((q, i) => `${i}. [${q.author} / ${q.source}] ${q.quote} (tags: ${q.emotion.join(', ')})`)
         .join('\n');
     const prompt = [
@@ -82,12 +69,12 @@ exports.quoteMatchFlow = ai.defineFlow({
         throw new Error('Empty text response from model');
     const match = rawText.match(/\{[\s\S]*\}/);
     const parsed = JSON.parse(match ? match[0] : '{}');
-    const idx = Math.max(0, Math.min(QUOTES.length - 1, Number(parsed.chosenIndex)));
+    const idx = Math.max(0, Math.min(quotes_1.QUOTES.length - 1, Number(parsed.chosenIndex)));
     const result = {
         input: String(parsed.input ?? inputText),
         chosenIndex: idx,
         reason: String(parsed.reason ?? '문맥 유사성에 기반한 선택'),
-        quote: QUOTES[idx],
+        quote: quotes_1.QUOTES[idx],
     };
     return QuoteMatchSchema.parse(result);
 });
