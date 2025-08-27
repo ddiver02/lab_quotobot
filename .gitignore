@@ -1,1 +1,24 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# Build output
+/dist
+
+# Genkit cache & logs
+.genkit/runtimes/
+.genkit/servers/
+.genkit/traces/
+.genkit/traces_idx/
+*.log
+
+# Environment variables
 .env
+.env*.local
+
+# macOS
+.DS_Store
+
+# IDEs
+.vscode/
