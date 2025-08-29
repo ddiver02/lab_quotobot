@@ -23,4 +23,4 @@
 # IDEs
 .vscode/
 
-cors.yaml
+.cors.yaml
