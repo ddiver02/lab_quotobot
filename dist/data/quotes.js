@@ -509,4 +509,5 @@ exports.QUOTES = [
         "emotion": ["용기", "강인함", "투지", "희망", "영감", "성찰", "자존감", "청춘", "각성", "열정"]
     },
 ];
+exports.default = exports.QUOTES;
 //# sourceMappingURL=quotes.js.map

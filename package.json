@@ -14,17 +14,19 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@genkit-ai/express": "^1.16.1",
-    "@genkit-ai/google-genai": "^1.16.1",
+    "@genkit-ai/express": "^1.17.1",
+    "@genkit-ai/google-genai": "^1.17.1",
     "@google/generative-ai": "^0.24.1",
     "@supabase/supabase-js": "^2.56.0",
     "dotenv": "^17.2.1",
+    "cors": "^2.8.5",
     "express": "^4.21.2",
-    "genkit": "^1.16.1",
+    "genkit": "^1.17.1",
     "tsx": "^4.20.4",
     "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.3",
     "@types/node": "^24.3.0",
     "ts-node": "^10.9.2",
